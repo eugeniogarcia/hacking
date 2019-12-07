@@ -6,7 +6,7 @@ services:
       restart: always
       hostname: nginx
       ports:
-        - "80:80"
+        - "90:80"
       links:
         - openvas
       volumes:
@@ -19,7 +19,7 @@ services:
       restart: always
       hostname: nginx_ssl
       ports:
-        - "443:443"
+        - "943:443"
       links:
         - openvas
         - letsencrypt
@@ -36,8 +36,8 @@ services:
       links:
         - nginx
       environment:
-        DOMAINS: example.com
-        EMAIL: webmaster@example.com
+        DOMAINS: www.gz.com
+        EMAIL: webmaster@www.gz.com
         WEBROOT_PATH: /tmp/letsencrypt
         EXP_LIMIT: 30
         CHECK_FREQ: 30
@@ -45,13 +45,13 @@ services:
       restart: always
       image: mikesplain/openvas
       hostname: openvas
-      expose:
-        - "443"
+      ports:
+        - "444:443"
+        - "9390:9390"
       volumes:
         - "./data/openvas:/var/lib/openvas/mgr/"
       environment:
-        # CHANGE THIS !
-        OV_PASSWORD: securepassword41
+        OV_PASSWORD: "admin"
       labels:
          deck-chores.dump.command: sh -c "greenbone-nvt-sync; openvasmd --rebuild --progress"
          deck-chores.dump.interval: daily
