@@ -79,3 +79,13 @@ apt-get upgrade
 
 apt-get autoremove
 ```
+
+Then:
+
+```sh
+docker commit openvas egsmartin/openvas:1
+```
+
+# Configuration using a iso image
+
+See the instructions [here](https://www.greenbone.net/en/install_use_gce/).
